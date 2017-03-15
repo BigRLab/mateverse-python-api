@@ -4,7 +4,8 @@ import mimetypes
 import urllib2
 import codecs
 
-class Prediction():
+
+class Prediction:
     def __init__ (self, api_secret, model_id):
         self.url = "https://www.mateverse.com/v1/predict"
         self.api_secret = api_secret
@@ -15,31 +16,24 @@ class Prediction():
         form.add_field('api_secret', self.api_secret)
         form.add_field('model_id', self.model_id)
 
-    
         for image in images:
-
-            form.add_file('file', image,
-                      fileHandle=codecs.open(image, "rb"), mimetype='image/pjpeg')
-    
+            form.add_file('file', image, fileHandle=codecs.open(image, "rb"))
     
         request = urllib2.Request(self.url)
-        # request.add_header('User-agent', 'Mateverse.com')
+        request.add_header('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+                                         '(KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36')
         body = str(form)
         request.add_header('Content-type', form.get_content_type())
         request.add_header('Content-length', len(body))
         request.add_data(body)
-       
 
-        print
-        print 'OUTGOING DATA:'
+        # Outgoing Data
         print request.get_data()
 
-        print
-        print 'SERVER RESPONSE:'
-        print urllib2.urlopen(request).read()
-        return urllib2.urlopen(request).read()
+        # Response from server
+        response = urllib2.urlopen(request).read()
 
-
+        return response
 
 
 class MultiPartForm(object):
@@ -100,22 +94,21 @@ class MultiPartForm(object):
         flattened.append('')
         return '\r\n'.join(flattened)
 
-
 if __name__ == '__main__':
-	#Put your api_secret key here
+    # Put your api_secret key here
     api_secret = '**********************'
 
-    #Put the ID of the model that you want to use for prediction
+    # Put the id of the model that you want to use for prediction
     model_id = '**'
 
     # The images list will contain paths to all the images
     # on which you want to make the prediction
     images = ['path_to_image1/image1.jpeg', 'path_to_image2/image2.jpeg']
 
-    #Creating a class instance and passing in the api_secret and model_id to it
+    # Creating a class instance and passing in the api_secret and model_id to it
     prediction = Prediction(api_secret, model_id)
 
-    #Passing in the list of images to the predict function
+    # Passing in the list of images to the predict function
     response = prediction.predict(images)
 
     print response
