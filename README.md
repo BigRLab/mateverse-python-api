@@ -19,7 +19,8 @@ The model_id is to tell the API which model to use for your prediction.
 #### Path to your images
 You need to give the path to the images which will go inside a list. You can pass in the path to as much images as you want.
 
-## Run 'python request.py'
+## Run
+    python request.py
 
 ## Response
 Response will be a JSON object, easily parseable in all programming languages.
