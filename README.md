@@ -24,32 +24,27 @@ You need to give the path to the images which will go inside a list. You can pas
 ## Response
 Response will be a JSON object, easily parseable in all programming languages.
 
-    {
-       "status":"success",
-       "message":"Predictions.",
-       "predictions":{
-          "image1.jpg":[
-             {
-                "predicted_score":"0.999014",
-                "predicted_label":"label1"
-             },
-             {
-                "predicted_score":"0.000986326",
-                "predicted_label":"label2"
-             }
-          ],
-          "image2.jpg":[
-             {
-                "predicted_score":"0.991155",
-                "predicted_label":"label2"
-             },
-             {
-                "predicted_score":"0.00884475",
-                "predicted_label":"label1"
-             }
-          ]
-       }
-    }
+    [
+      {
+        "status": "success",
+        "message": "Predictions.",
+        "predictions": [
+          {
+            "sample": "earring_470.jpg",
+            "predictions": [
+              {
+                "predicted_score": "0.999816",
+                "predicted_label": "earring"
+              },
+              {
+                "predicted_score": "0.000184305",
+                "predicted_label": "bracelt"
+              }
+            ]
+          }
+        ]
+      }
+    ]
 
 
 ## Licensing
