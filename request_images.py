@@ -11,10 +11,11 @@ class Prediction:
         self.api_secret = api_secret
         self.model_id = model_id
 
-    def predict(self, image_url=None, file_paths=None):
+    def predict(self, image_url=None, file_paths=None, limit=5):
         form = MultiPartForm()
         form.add_field('api_secret', self.api_secret)
         form.add_field('model_id', self.model_id)
+        form.add_field('limit', str(limit))
 
         if image_url is not None:
             # This post parameter is common request for both Images and Text based models
@@ -115,10 +116,13 @@ if __name__ == '__main__':
     # Url of an image
     image_url = 'url to a public image'
 
+    # Limit number of top predictions for this request
+    limit = 5
+
     # Creating a class instance and passing in the api_secret and model_id to it
     prediction = Prediction(api_secret, model_id)
 
     # Passing in the list of images to the predict function
-    response = prediction.predict(image_url=image_url, file_paths=file_paths)
+    response = prediction.predict(image_url=image_url, file_paths=file_paths, limit=limit)
 
     print response
