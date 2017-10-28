@@ -7,7 +7,7 @@ import codecs
 
 class Prediction:
     def __init__ (self, api_secret, model_id):
-        self.url = "https://www.mateverse.com/v1/predict"
+        self.url = "https://www.mateverse.com/v1/predict/"
         self.api_secret = api_secret
         self.model_id = model_id
 
@@ -35,7 +35,7 @@ class Prediction:
         request.add_data(body)
 
         # Outgoing Data
-        print request.get_data()
+        # print request.get_data()
 
         # Response from server
         response = urllib2.urlopen(request).read()
